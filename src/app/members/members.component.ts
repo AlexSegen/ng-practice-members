@@ -18,14 +18,14 @@ export class MembersComponent implements OnInit {
   isLoading:Boolean;
   editMode:Boolean;
 
-  editingSalaryId: String;
+  editingSalaryId: Number;
   
   constructor(private _memberService: MemberService) {
     this.isLoading = false;
     this.requestResult = false;
     this.editMode = false;
-    this.editingSalaryId = ""
-    this.selectedMember = new Member("0", "", "", "", 0, false );
+    this.editingSalaryId = 0
+    this.selectedMember = new Member(0, "", "", "", 0, "", false );
   }
 
   ngOnInit() {
@@ -35,14 +35,14 @@ export class MembersComponent implements OnInit {
   updateSalary(val) {
     this._memberService.updateMemberSalary(this.editingSalaryId, val).then(() => {
       this.editMode = false;
-      this.editingSalaryId = "" 
+      this.editingSalaryId = 0
       utils.notification('info', 'Member salary updated to $' + val)
     })
   }
 
-  toggleUpdateSalary(val:Boolean, memberId:String) {
+  toggleUpdateSalary(val:Boolean, memberId:Number) {
     this.editMode = val;
-    val ? this.editingSalaryId = memberId : this.editingSalaryId = ""
+    val ? this.editingSalaryId = memberId : this.editingSalaryId = 0
   }
 
   getMembers(): void {
@@ -62,7 +62,7 @@ export class MembersComponent implements OnInit {
   }
 
   resetform(): void {
-    this.selectedMember = new Member("0", "", "", "", 0, false );
+    this.selectedMember = new Member(0, "", "", "", 0, "", false );
   }
 
   getMember(member): void {
@@ -80,9 +80,8 @@ export class MembersComponent implements OnInit {
   setMember(): void {
     this.isLoading = true;
     setTimeout(() => {
-      if (this.selectedMember.id == "0") {
+      if (this.selectedMember.id == 0) {
         this._memberService.addMember(this.selectedMember).then(data=> {
-          console.log(data)
           this.resetform()
           utils.notification('success', 'Member added')
         }).catch(error => {
@@ -92,7 +91,6 @@ export class MembersComponent implements OnInit {
         })
       } else {
         this._memberService.updateMember(this.selectedMember.id, this.selectedMember).then(data => {
-          console.log(data)
           this.resetform()
           utils.notification('info', 'Member updated')
         }).catch(error => {

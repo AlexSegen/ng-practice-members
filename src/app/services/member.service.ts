@@ -12,33 +12,45 @@ export class MemberService {
 
   constructor() {
     this.members = [{
-      "id": "1",
-      "name": "Correy O'Gormally",
-      "email": "cogormally0@4shared.com",
-      "company": "Izio",
-      "salary": 1150,
-      "isActive": true
+      "id": 1,
+      "name": "Morrie Pallesen",
+      "email": "mpallesen0@yale.edu",
+      "company": "Thoughtblab",
+      "isActive": false,
+      "role": "Marketing Manager",
+      "salary": 1738
     }, {
-      "id": "2",
-      "name": "Nesta Udell",
-      "email": "nudell1@cafepress.com",
-      "company": "Chatterpoint",
-      "salary": 1050,
-      "isActive": false
+      "id": 2,
+      "name": "Bev Moulds",
+      "email": "bmoulds1@salon.com",
+      "company": "Linkbuzz",
+      "isActive": true,
+      "role": "Civil Engineer",
+      "salary": 1958
     }, {
-      "id": "3",
-      "name": "Welsh Faulkes",
-      "email": "wfaulkes2@cafepress.com",
-      "company": "Tagopia",
-      "salary": 1860,
-      "isActive": true
+      "id": 3,
+      "name": "Manya Crocken",
+      "email": "mcrocken2@house.gov",
+      "company": "Twinder",
+      "isActive": true,
+      "role": "Research Assistant I",
+      "salary": 1826
     }, {
-      "id": "4",
-      "name": "Barnabe Korlat",
-      "email": "bkorlat3@biblegateway.com",
-      "company": "Blogpad",
-      "salary": 1250,
-      "isActive": false
+      "id": 4,
+      "name": "Ara Lissandri",
+      "email": "alissandri3@yellowbook.com",
+      "company": "Rooxo",
+      "isActive": true,
+      "role": "Sales Associate",
+      "salary": 540
+    }, {
+      "id": 5,
+      "name": "Morissa Plenderleith",
+      "email": "mplenderleith4@craigslist.org",
+      "company": "Topicshots",
+      "isActive": false,
+      "role": "Quality Engineer",
+      "salary": 1430
     }]
    }
 
@@ -57,7 +69,7 @@ export class MemberService {
     })
   }
 
-  updateMember(memberId: String, payload: Member) {
+  updateMember(memberId: Number, payload: Member) {
     return new Promise((resolve, reject) => {
       let tmp = this.members;
       let index = tmp.findIndex(i => i.id == memberId);
@@ -71,7 +83,7 @@ export class MemberService {
     })
   }
 
-  updateMemberSalary(memberId: String, newSalary: Number) {
+  updateMemberSalary(memberId: Number, newSalary: Number) {
     return new Promise((resolve, reject) => {
       let tmp = this.members;
       let index = tmp.findIndex(i => i.id == memberId);
