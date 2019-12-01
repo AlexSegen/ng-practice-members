@@ -37,8 +37,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-8">
-                                    <button (click)="handleForm()" [disabled]="isLoading" class="btn btn-primary" type="button">Save</button>
+                            <div class="col-sm-8 d-flex">
+                                    <button *ngIf="selectedMember.id == '0'; else updateBlock" (click)="handleForm()" [disabled]="isLoading" class="btn btn-primary" type="button">Create</button>
+                                    <ng-template #updateBlock>
+                                        <button (click)="handleForm()" [disabled]="isLoading" class="btn btn-info" type="button">Update</button>
+                                    </ng-template>
+                                    
                                     <button (click)="resetform()"  [disabled]="isLoading" class="btn btn-link text-muted" type="button">Clear</button>
                             </div>
                             <div class="col-sm-4" *ngIf="isLoading">

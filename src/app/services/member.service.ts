@@ -53,7 +53,7 @@ export class MemberService {
           this.members.push(member);
           resolve(member)
         }
-        reject(false)
+        reject("Error creating member")
     })
   }
 
@@ -67,7 +67,7 @@ export class MemberService {
         this.members = tmp;
         resolve({...tmp[index], ...payload})
       }
-      reject(false)
+      reject("Member not found")
     })
   }
 
@@ -81,7 +81,7 @@ export class MemberService {
         this.members = tmp;
         resolve(tmp[index])
       }
-      reject(false)
+      reject("Member not found")
     })
   }
 
@@ -93,7 +93,7 @@ export class MemberService {
           this.members.splice(index, 1);
           resolve(true)
         }
-        reject(false)
+        reject("Member not found")
       }, 500);
     })
   }

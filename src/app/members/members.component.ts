@@ -85,15 +85,23 @@ export class MembersComponent implements OnInit {
           console.log(data)
           this.resetform()
           utils.notification('success', 'Member added')
+        }).catch(error => {
+          utils.notification('error', error)
+        }).finally(() => {
+          this.isLoading = false;
         })
       } else {
         this._memberService.updateMember(this.selectedMember.id, this.selectedMember).then(data => {
           console.log(data)
           this.resetform()
           utils.notification('info', 'Member updated')
+        }).catch(error => {
+          utils.notification('error', error)
+        }).finally(() => {
+          this.isLoading = false;
         })
       }
-      this.isLoading = false;
+      
     }, 1500);
   }
 
