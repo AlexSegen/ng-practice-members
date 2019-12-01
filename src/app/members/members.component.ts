@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from '../models/member'
 import { MemberService } from '../services/member.service';
 
+import utils from '../helpers/utils'
+
 
 @Component({
   selector: 'app-members',
@@ -30,10 +32,14 @@ export class MembersComponent implements OnInit {
   }
 
   deleteMember(member): void  {
-    this.isLoading = true;
-    this._memberService.deleteMember(member).then(() => {
-      this.requestResult = "Member deleted";
-      this.isLoading = false;
+    utils.dialog('warning', 'Confirm this action').then(value => {
+      if(value) {
+        this.isLoading = true;
+        this._memberService.deleteMember(member).then(() => {
+          utils.notification('warning', 'Member deleted')
+          this.isLoading = false;
+        })
+      }
     })
   }
 
@@ -45,6 +51,14 @@ export class MembersComponent implements OnInit {
     this.selectedMember = member
   }
 
+  handleForm() {
+    utils.dialog('question', 'Confirm this action').then(value => {
+      if(value) {
+        this.setMember()
+      }
+    })
+  }
+
   setMember(): void {
     this.isLoading = true;
     setTimeout(() => {
@@ -52,13 +66,13 @@ export class MembersComponent implements OnInit {
         this._memberService.addMember(this.selectedMember).then(data=> {
           console.log(data)
           this.resetform()
-          this.requestResult = "New member added";
+          utils.notification('success', 'Member added')
         })
       } else {
         this._memberService.updateMember(this.selectedMember.id, this.selectedMember).then(data => {
           console.log(data)
           this.resetform()
-          this.requestResult = "Member Updated";
+          utils.notification('info', 'Member updated')
         })
       }
       this.isLoading = false;

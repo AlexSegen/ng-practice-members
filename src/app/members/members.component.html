@@ -38,7 +38,7 @@
 
                         <div class="form-group row">
                             <div class="col-sm-8">
-                                    <button (click)="setMember()" [disabled]="isLoading" class="btn btn-primary" type="button">Save</button>
+                                    <button (click)="handleForm()" [disabled]="isLoading" class="btn btn-primary" type="button">Save</button>
                                     <button (click)="resetform()"  [disabled]="isLoading" class="btn btn-link text-muted" type="button">Clear</button>
                             </div>
                             <div class="col-sm-4" *ngIf="isLoading">
