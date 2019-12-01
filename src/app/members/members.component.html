@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         <div class="col-xl-3 col-sm-4">
             <div class="card">
@@ -62,7 +62,7 @@
                             <td>Name</td>
                             <td>Email</td>
                             <td>Company</td>
-                            <td>Salary</td>
+                            <td class="text-right">Salary</td>
                             <td></td>
                         </tr>
                     </thead>
@@ -77,7 +77,7 @@
                             <span class="text-muted small">ID: {{ member.id }}</span></td>
                             <td>{{ member.email }}</td>
                             <td>{{ member.company }}</td>
-                            <td>
+                            <td class="text-right" style="width: 200px;">
                                 <div *ngIf="editMode && editingSalaryId == member.id; else elseBlock">
                                     <price-input (salaryChange)='updateSalary($event)' (editChange)='toggleUpdateSalary($event)' [editingsalary]="member.salary"></price-input>
                                 </div>
@@ -87,7 +87,7 @@
                                     </a>
                                 </ng-template>
                             </td>
-                            <td>
+                            <td class="d-flex">
                                 <button type="button" (click)="getMember(member)"   class="btn btn-link btn-sm text-success">Edit</button>
                                 <button type="button" (click)="deleteMember(member)" class="btn btn-link btn-sm text-danger">Delete</button>
                             </td>
