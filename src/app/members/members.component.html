@@ -1,0 +1,95 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-12">
+                <h3>Members</h3>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-sm-4">
+            <div class="card">
+                <div class="card-header">Member Management</div>
+                <div class="card-body">
+
+
+                    <div>
+                        <input type="hidden" [(ngModel)]="selectedMember.id">
+                        <div class="form-group">
+                            <input type="text" [(ngModel)]="selectedMember.name" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" [(ngModel)]="selectedMember.email" class="form-control" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" [(ngModel)]="selectedMember.company" class="form-control" placeholder="Company">
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" id="isActive" class="form-control1 mr-2" [(ngModel)]="selectedMember.isActive" checked="selectedMember.isActive">
+                            <label for="isActive">
+                                Is active 
+                            </label>
+                        </div>
+                        
+                        <div class="alert small text-xs p-2" *ngIf="requestResult">
+                            {{requestResult}}
+                        </div>
+
+                        
+
+        
+
+                        <div class="form-group row">
+                            <div class="col-sm-8">
+                                    <button (click)="setMember()"  class="btn btn-primary" type="button">Save</button>
+                                    <button (click)="resetform()"  class="btn btn-link text-muted" type="button">Clear</button>
+                            </div>
+                            <div class="col-sm-4" *ngIf="isLoading">
+                                <div class="clearfix">
+                                    <div class="spinner-border spinner-border-sm float-right" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-sm-8">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <td>id</td>
+                            <td>Name</td>
+                            <td>Email</td>
+                            <td>Company</td>
+                            <td>Active</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let member of members">
+                            <td>{{ member.id }}</td>
+                            <td>{{ member.name }}</td>
+                            <td>{{ member.email }}</td>
+                            <td>{{ member.company }}</td>
+                            <td>
+                                <div *ngIf="member.isActive" class="spinner-grow spinner-grow-sm text-success" role="status">
+                                </div>
+
+                            </td>
+                            <td>
+                                <button type="button" (click)="getMember(member)"   class="btn btn-link btn-sm text-success">Edit</button>
+                                <button type="button" (click)="deleteMember(member)" class="btn btn-link btn-sm text-danger">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
