@@ -69,7 +69,20 @@ export class MemberService {
       }
       reject(false)
     })
+  }
 
+  updateMemberSalary(memberId: String, newSalary: Number) {
+    return new Promise((resolve, reject) => {
+      let tmp = this.members;
+      let index = tmp.findIndex(i => i.id == memberId);
+
+      if(index != -1) {
+        tmp[index].salary = newSalary;
+        this.members = tmp;
+        resolve(tmp[index])
+      }
+      reject(false)
+    })
   }
 
   deleteMember(member: Member) {

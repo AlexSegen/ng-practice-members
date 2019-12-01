@@ -69,12 +69,24 @@
                     <tbody>
                         <tr *ngFor="let member of members">
                             <td> 
-                                <div *ngIf="member.isActive" class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
+                                <div *ngIf="member.isActive; else inactiveBlock" class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
+                                <ng-template #inactiveBlock>
+                                    <i  class="fa fa-circle text-muted mr-1"></i>
+                                </ng-template>
                                 {{ member.name }} <br>
                             <span class="text-muted small">ID: {{ member.id }}</span></td>
                             <td>{{ member.email }}</td>
                             <td>{{ member.company }}</td>
-                            <td>{{ member.salary }}</td>
+                            <td>
+                                <div *ngIf="editMode && editingSalaryId == member.id; else elseBlock">
+                                    <price-input (salaryChange)='updateSalary($event)' (editChange)='toggleUpdateSalary($event)' [editingsalary]="member.salary"></price-input>
+                                </div>
+                                <ng-template #elseBlock>
+                                    <a href="javascript:void(0);" (click)="toggleUpdateSalary(true, member.id)">
+                                        $ {{ member.salary }}
+                                    </a>
+                                </ng-template>
+                            </td>
                             <td>
                                 <button type="button" (click)="getMember(member)"   class="btn btn-link btn-sm text-success">Edit</button>
                                 <button type="button" (click)="deleteMember(member)" class="btn btn-link btn-sm text-danger">Delete</button>

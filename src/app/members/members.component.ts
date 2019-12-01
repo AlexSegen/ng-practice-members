@@ -16,15 +16,33 @@ export class MembersComponent implements OnInit {
   selectedMember:Member;
   requestResult;
   isLoading:Boolean;
+  editMode:Boolean;
 
+  editingSalaryId: String;
+  
   constructor(private _memberService: MemberService) {
     this.isLoading = false;
     this.requestResult = false;
+    this.editMode = false;
+    this.editingSalaryId = ""
     this.selectedMember = new Member("0", "", "", "", 0, false );
   }
 
   ngOnInit() {
     this.getMembers()
+  }
+
+  updateSalary(val) {
+    this._memberService.updateMemberSalary(this.editingSalaryId, val).then(() => {
+      this.editMode = false;
+      this.editingSalaryId = "" 
+      utils.notification('info', 'Member salary updated to $' + val)
+    })
+  }
+
+  toggleUpdateSalary(val:Boolean, memberId:String) {
+    this.editMode = val;
+    val ? this.editingSalaryId = memberId : this.editingSalaryId = ""
   }
 
   getMembers(): void {
