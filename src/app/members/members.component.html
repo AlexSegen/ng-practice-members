@@ -36,10 +36,6 @@
                             {{requestResult}}
                         </div>
 
-                        
-
-        
-
                         <div class="form-group row">
                             <div class="col-sm-8">
                                     <button (click)="setMember()"  class="btn btn-primary" type="button">Save</button>
@@ -63,7 +59,6 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <td>id</td>
                             <td>Name</td>
                             <td>Email</td>
                             <td>Company</td>
@@ -73,8 +68,8 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let member of members">
-                            <td>{{ member.id }}</td>
-                            <td>{{ member.name }}</td>
+                            <td>{{ member.name }} <br>
+                            <span class="text-muted small">ID: {{ member.id }}</span></td>
                             <td>{{ member.email }}</td>
                             <td>{{ member.company }}</td>
                             <td>

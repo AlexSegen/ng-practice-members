@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
-import _ from 'underscore'
-
 import { Member } from '../models/member'
-import { members } from '../../services/members.service'
+import { MemberService } from '../services/member.service';
 
 
 @Component({
@@ -18,45 +15,51 @@ export class MembersComponent implements OnInit {
   requestResult;
   isLoading:Boolean;
 
-  constructor() {
+  constructor(private _memberService: MemberService) {
     this.isLoading = false;
     this.requestResult = false;
-    this.members = members;
-  }
-
-  ngOnInit() {
-    this.resetform()
-  }
-
-  deleteMember(member) {
-    this.isLoading = true;
-    setTimeout(() => {
-      let index = this.members.findIndex(i => i.id == member.id);
-      this.members.splice(index, 1);      
-      this.requestResult = "Member deleted";
-      this.isLoading = false;
-    }, 1000);
-  }
-
-  resetform() {
     this.selectedMember = new Member("0", "", "", "", false );
   }
 
-  getMember(member) {
+  ngOnInit() {
+    this.getMembers()
+  }
+
+  getMembers(): void {
+    this.members = this._memberService.getMembers();
+  }
+
+  deleteMember(member): void  {
+    this.isLoading = true;
+    this._memberService.deleteMember(member).then(() => {
+      this.requestResult = "Member deleted";
+      this.isLoading = false;
+    })
+  }
+
+  resetform(): void {
+    this.selectedMember = new Member("0", "", "", "", false );
+  }
+
+  getMember(member): void {
     this.selectedMember = member
   }
 
-  setMember() {
+  setMember(): void {
     this.isLoading = true;
     setTimeout(() => {
       if (this.selectedMember.id == "0") {
-        this.selectedMember.id = _.uniqueId('_');
-        this.members.push(this.selectedMember);
-        this.resetform()
-        this.requestResult = "New member added";
+        this._memberService.addMember(this.selectedMember).then(data=> {
+          console.log(data)
+          this.resetform()
+          this.requestResult = "New member added";
+        })
       } else {
-        this.resetform()
-        this.requestResult = "Member Updated";
+        this._memberService.updateMember(this.selectedMember.id, this.selectedMember).then(data => {
+          console.log(data)
+          this.resetform()
+          this.requestResult = "Member Updated";
+        })
       }
       this.isLoading = false;
     }, 1500);
