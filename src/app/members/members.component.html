@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-xl-3 col-sm-4">
             <div class="card">
@@ -62,21 +62,19 @@
                             <td>Name</td>
                             <td>Email</td>
                             <td>Company</td>
-                            <td>Active</td>
+                            <td>Salary</td>
                             <td></td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let member of members">
-                            <td>{{ member.name }} <br>
+                            <td> 
+                                <div *ngIf="member.isActive" class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
+                                {{ member.name }} <br>
                             <span class="text-muted small">ID: {{ member.id }}</span></td>
                             <td>{{ member.email }}</td>
                             <td>{{ member.company }}</td>
-                            <td>
-                                <div *ngIf="member.isActive" class="spinner-grow spinner-grow-sm text-success" role="status">
-                                </div>
-
-                            </td>
+                            <td>{{ member.salary }}</td>
                             <td>
                                 <button type="button" (click)="getMember(member)"   class="btn btn-link btn-sm text-success">Edit</button>
                                 <button type="button" (click)="deleteMember(member)" class="btn btn-link btn-sm text-danger">Delete</button>

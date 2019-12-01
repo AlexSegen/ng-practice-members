@@ -16,24 +16,28 @@ export class MemberService {
       "name": "Correy O'Gormally",
       "email": "cogormally0@4shared.com",
       "company": "Izio",
+      "salary": 1150,
       "isActive": true
     }, {
       "id": "2",
       "name": "Nesta Udell",
       "email": "nudell1@cafepress.com",
       "company": "Chatterpoint",
+      "salary": 1050,
       "isActive": false
     }, {
       "id": "3",
       "name": "Welsh Faulkes",
       "email": "wfaulkes2@cafepress.com",
       "company": "Tagopia",
+      "salary": 1860,
       "isActive": true
     }, {
       "id": "4",
       "name": "Barnabe Korlat",
       "email": "bkorlat3@biblegateway.com",
       "company": "Blogpad",
+      "salary": 1250,
       "isActive": false
     }]
    }

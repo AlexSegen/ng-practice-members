@@ -20,7 +20,7 @@ export class MembersComponent implements OnInit {
   constructor(private _memberService: MemberService) {
     this.isLoading = false;
     this.requestResult = false;
-    this.selectedMember = new Member("0", "", "", "", false );
+    this.selectedMember = new Member("0", "", "", "", 0, false );
   }
 
   ngOnInit() {
@@ -44,7 +44,7 @@ export class MembersComponent implements OnInit {
   }
 
   resetform(): void {
-    this.selectedMember = new Member("0", "", "", "", false );
+    this.selectedMember = new Member("0", "", "", "", 0, false );
   }
 
   getMember(member): void {
