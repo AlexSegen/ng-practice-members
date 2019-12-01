@@ -86,8 +86,8 @@
                                     <price-input (salaryChange)='updateSalary($event)' (editChange)='toggleUpdateSalary($event)' [editingsalary]="member.salary"></price-input>
                                 </div>
                                 <ng-template #elseBlock>
-                                    <a href="javascript:void(0);" (click)="toggleUpdateSalary(true, member.id)">
-                                        $ {{ member.salary }}
+                                    <a href="javascript:void(0);" class="d-flex" (click)="toggleUpdateSalary(true, member.id)">
+                                        $ {{ member.salary | formatCurrency }}
                                     </a>
                                 </ng-template>
                             </td>

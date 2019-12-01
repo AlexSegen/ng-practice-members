@@ -7,11 +7,14 @@ import { AppComponent } from './app.component';
 import { MembersComponent } from './members/members.component';
 import { PriceInputComponent } from './members/price-input/price-input.component';
 
+import { CurrencyPipe } from './pipes/currency.pipe'
+
 @NgModule({
   declarations: [
     AppComponent,
     MembersComponent,
-    PriceInputComponent
+    PriceInputComponent,
+    CurrencyPipe
   ],
   imports: [
     BrowserModule,
