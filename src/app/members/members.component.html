@@ -88,8 +88,12 @@
                                 </ng-template>
                             </td>
                             <td class="d-flex">
-                                <button type="button" (click)="getMember(member)"   class="btn btn-link btn-sm text-success">Edit</button>
-                                <button type="button" (click)="deleteMember(member)" class="btn btn-link btn-sm text-danger">Delete</button>
+                                <button type="button" (click)="getMember(member)"   class="btn btn-link btn-sm text-success">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button type="button" (click)="deleteMember(member)" class="btn btn-link btn-sm text-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

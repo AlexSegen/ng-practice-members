@@ -1,9 +1,9 @@
-<div class="input-group" style="width: 200px; float:right">
-    <input type="number" class="form-control text-right" placeholder="Salary" [(ngModel)]="editingsalary">
-    <div class="input-group-append">
-        <button class="btn btn-success" type="button" (click)="saveChanges()" >
-            <i class="fa fa-save"></i>
-        </button>
-        <button class="btn btn-outline-secondary" (click)="cancelChanges()" type="button"><i class="fa fa-times"></i></button>
+<div class="price-input">
+    <div class="price-input__field">
+        <input type="number" class="form-control text-right" placeholder="Salary" [(ngModel)]="editingsalary">
+    </div>
+    <div class="price-input__actions">
+        <button class="btn btn-sm btn-success" type="button" (click)="saveChanges()" ><i class="fa fa-save"></i></button>
+        <button class="btn btn-sm btn-outline-default" (click)="cancelChanges()" type="button"><i class="fa fa-times"></i></button>
     </div>
 </div>

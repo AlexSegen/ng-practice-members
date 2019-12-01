@@ -1,0 +1,18 @@
+.price-input {
+    display: block;
+    position: relative;
+
+    &__field {
+        .form-control {
+            padding-left: 60px;
+        }
+    }
+
+    &__actions {
+        position: absolute;
+        display: flex;
+        top: 4px;
+        left: 4px;
+    }
+
+}
