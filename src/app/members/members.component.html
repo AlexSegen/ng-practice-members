@@ -17,16 +17,16 @@
                     <div>
                         <input type="hidden" [(ngModel)]="selectedMember.id">
                         <div class="form-group">
-                            <input type="text" [(ngModel)]="selectedMember.name" class="form-control" placeholder="Name">
+                            <input [disabled]="isLoading" type="text" [(ngModel)]="selectedMember.name" class="form-control" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <input type="email" [(ngModel)]="selectedMember.email" class="form-control" placeholder="Email">
+                            <input [disabled]="isLoading" type="email" [(ngModel)]="selectedMember.email" class="form-control" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="text" [(ngModel)]="selectedMember.company" class="form-control" placeholder="Company">
+                            <input [disabled]="isLoading" type="text" [(ngModel)]="selectedMember.company" class="form-control" placeholder="Company">
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" id="isActive" class="form-control1 mr-2" [(ngModel)]="selectedMember.isActive" checked="selectedMember.isActive">
+                            <input [disabled]="isLoading" type="checkbox" id="isActive" class="form-control1 mr-2" [(ngModel)]="selectedMember.isActive" checked="selectedMember.isActive">
                             <label for="isActive">
                                 Is active 
                             </label>
@@ -38,8 +38,8 @@
 
                         <div class="form-group row">
                             <div class="col-sm-8">
-                                    <button (click)="setMember()"  class="btn btn-primary" type="button">Save</button>
-                                    <button (click)="resetform()"  class="btn btn-link text-muted" type="button">Clear</button>
+                                    <button (click)="setMember()" [disabled]="isLoading" class="btn btn-primary" type="button">Save</button>
+                                    <button (click)="resetform()"  [disabled]="isLoading" class="btn btn-link text-muted" type="button">Clear</button>
                             </div>
                             <div class="col-sm-4" *ngIf="isLoading">
                                 <div class="clearfix">
