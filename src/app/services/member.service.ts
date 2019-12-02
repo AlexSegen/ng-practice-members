@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+
 import { Member } from '../models/member'
 
 import _ from 'underscore'
@@ -9,78 +12,29 @@ import _ from 'underscore'
 export class MemberService {
   
   members:Array<Member>;
+  url:string;
 
-  constructor() {
-    this.members = [{
-      "id": 1,
-      "name": "Morrie Pallesen",
-      "email": "mpallesen0@yale.edu",
-      "company": "Thoughtblab",
-      "isActive": false,
-      "role": "Marketing Manager",
-      "salary": 1738
-    }, {
-      "id": 2,
-      "name": "Bev Moulds",
-      "email": "bmoulds1@salon.com",
-      "company": "Linkbuzz",
-      "isActive": true,
-      "role": "Civil Engineer",
-      "salary": 1958
-    }, {
-      "id": 3,
-      "name": "Manya Crocken",
-      "email": "mcrocken2@house.gov",
-      "company": "Twinder",
-      "isActive": true,
-      "role": "Research Assistant I",
-      "salary": 1826
-    }, {
-      "id": 4,
-      "name": "Ara Lissandri",
-      "email": "alissandri3@yellowbook.com",
-      "company": "Rooxo",
-      "isActive": true,
-      "role": "Sales Associate",
-      "salary": 540
-    }, {
-      "id": 5,
-      "name": "Morissa Plenderleith",
-      "email": "mplenderleith4@craigslist.org",
-      "company": "Topicshots",
-      "isActive": false,
-      "role": "Quality Engineer",
-      "salary": 1430
-    }]
+
+  constructor( private _http: HttpClient) {
+    this.url = "http://localhost:3000/members"
+    this.members = []
    }
 
-  getMembers(): Member[] {
-    return this.members;   
+  /* getMembers(): Member[] {
+
+    return this.members;
+  } */
+
+  public getMembers(){
+    return this._http.get(this.url);
   }
 
   addMember(member:Member) {
-    return new Promise((resolve, reject) => {
-        member.id = _.now();
-        if(member.id) {
-          this.members.push(member);
-          resolve(member)
-        }
-        reject("Error creating member")
-    })
+    return this._http.post(this.url, member);
   }
 
-  updateMember(memberId: Number, payload: Member) {
-    return new Promise((resolve, reject) => {
-      let tmp = this.members;
-      let index = tmp.findIndex(i => i.id == memberId);
-
-      if(index != -1) {
-        tmp[index] = {...tmp[index], ...payload};
-        this.members = tmp;
-        resolve({...tmp[index], ...payload})
-      }
-      reject("Member not found")
-    })
+  updateMember(memberId: Number, payload) {
+    return this._http.put(this.url + "/"  + memberId, payload);
   }
 
   updateMemberSalary(memberId: Number, newSalary: Number) {

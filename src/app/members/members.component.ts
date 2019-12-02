@@ -46,7 +46,9 @@ export class MembersComponent implements OnInit {
   }
 
   getMembers(): void {
-    this.members = this._memberService.getMembers();
+    this._memberService.getMembers().subscribe((data: any[])=>{
+      this.members = data;
+    });
   }
 
   deleteMember(member): void  {
@@ -81,23 +83,30 @@ export class MembersComponent implements OnInit {
     this.isLoading = true;
     setTimeout(() => {
       if (this.selectedMember.id == 0) {
-        this._memberService.addMember(this.selectedMember).then(data=> {
+        this._memberService.addMember(this.selectedMember).subscribe(
+          val => {
+            console.log(val)
+            this.members.push(val)
+            this.isLoading = false
+            utils.notification('info', 'Member updated')
+          }
+        );
+       /*  this._memberService.addMember(this.selectedMember).then(data=> {
           this.resetform()
           utils.notification('success', 'Member added')
         }).catch(error => {
           utils.notification('error', error)
         }).finally(() => {
           this.isLoading = false;
-        })
+        }) */
       } else {
-        this._memberService.updateMember(this.selectedMember.id, this.selectedMember).then(data => {
-          this.resetform()
-          utils.notification('info', 'Member updated')
-        }).catch(error => {
-          utils.notification('error', error)
-        }).finally(() => {
-          this.isLoading = false;
-        })
+        this._memberService.updateMember(this.selectedMember.id, this.selectedMember).subscribe(
+          val => {
+            console.log(val)
+            this.isLoading = false
+            utils.notification('info', 'Member updated')
+          }
+        );
       }
       
     }, 1500);
