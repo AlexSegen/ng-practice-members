@@ -35,10 +35,7 @@ export class MembersComponent implements OnInit {
   updateSalary(val) {
     this._memberService.updateMemberSalary(this.editingSalaryId, val).subscribe(
       res => {
-        let tmp = this.members;
-        let index = tmp.findIndex(i => i.id == this.editingSalaryId);
-        tmp[index] = res;
-        this.members = tmp;
+        this.members[this.members.findIndex(i => i.id == this.editingSalaryId)] = res
         this.editMode = false;
         this.editingSalaryId = 0
         utils.notification('info', 'Member updated')
@@ -58,12 +55,16 @@ export class MembersComponent implements OnInit {
   }
 
   getMembers(): void {
+    this.isLoading = true;
     this._memberService.getMembers().subscribe(res => {
       this.members = res;
     },
-      error => {
-        console.log(error.message)
-      });
+    error => {
+      console.log(error.message)
+    },
+    () => {
+      this.isLoading = false;
+    })
   }
 
   deleteMember(member: Member): void {
@@ -72,10 +73,7 @@ export class MembersComponent implements OnInit {
         this.isLoading = true;
         this._memberService.deleteMember(member).subscribe(
           () => {
-            let tmp = this.members;
-            let index = tmp.findIndex(i => i.id == member.id);
-            tmp.splice(index, 1);
-            this.members = tmp;
+            this.members.splice(this.members.findIndex(i => i.id == member.id), 1);
             utils.notification('warning', 'Member deleted')
           },
           error => {
@@ -128,10 +126,7 @@ export class MembersComponent implements OnInit {
     } else {
       this._memberService.updateMember(this.selectedMember).subscribe(
         res => {
-          let tmp = this.members;
-          let index = tmp.findIndex(i => i.id == this.selectedMember.id);
-          tmp[index] = res;
-          this.members = tmp;
+          this.members[this.members.findIndex(i => i.id == this.editingSalaryId)] = res
           this.isLoading = false
           utils.notification('info', 'Member updated')
         },

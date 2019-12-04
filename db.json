@@ -1,15 +1,6 @@
 {
   "members": [
     {
-      "id": 1,
-      "name": "Morrie Pallesen",
-      "email": "mpallesen0@yale.edu",
-      "company": "Thoughtblab",
-      "isActive": false,
-      "role": "Marketing Manager",
-      "salary": 1738
-    },
-    {
       "id": 3,
       "name": "Manya Crocken",
       "email": "mcrocken2@house.gov",
@@ -19,26 +10,17 @@
       "salary": 1826
     },
     {
-      "id": 4,
-      "name": "Ara Lissandri",
-      "email": "alissandri3@yellowbook.com",
-      "company": "Rooxo",
-      "isActive": false,
-      "role": "Sales Associate",
-      "salary": 540
-    },
-    {
       "id": 6,
       "name": "Alejandro Vivas",
       "email": "ajvivas86@gmail.com",
       "company": "Carsales",
-      "salary": 1000,
+      "salary": 3000,
       "role": "Web Developer",
-      "isActive": true
+      "isActive": false
     },
     {
       "id": 7,
-      "name": "Arlenis Hidalgo",
+      "name": "Arlenis Hidalgo Mosqueda",
       "email": "marlesdream@gmail.com",
       "company": "Fairy Dreams SpA",
       "salary": 2500,
@@ -50,9 +32,27 @@
       "name": "Grissy Vivas",
       "email": "grissvi@gmail.com",
       "company": "N/A",
-      "salary": 230,
+      "salary": 2330,
       "role": "House Queen",
       "isActive": true
+    },
+    {
+      "id": 9,
+      "name": "José Daniel",
+      "email": "Carrasco",
+      "company": "N/A",
+      "salary": 1350,
+      "role": "N/A",
+      "isActive": true
+    },
+    {
+      "id": 10,
+      "name": "Luis",
+      "email": "Ramirez",
+      "company": "Tesla",
+      "salary": 3100,
+      "role": "IA Developer",
+      "isActive": false
     }
   ]
 }
