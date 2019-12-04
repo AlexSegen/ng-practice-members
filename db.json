@@ -10,15 +10,6 @@
       "salary": 1738
     },
     {
-      "id": 2,
-      "name": "Bev Moulds",
-      "email": "bmoulds1@salon.com",
-      "company": "Linkbuzz",
-      "isActive": true,
-      "role": "Civil Engineer",
-      "salary": 1958
-    },
-    {
       "id": 3,
       "name": "Manya Crocken",
       "email": "mcrocken2@house.gov",
@@ -32,25 +23,34 @@
       "name": "Ara Lissandri",
       "email": "alissandri3@yellowbook.com",
       "company": "Rooxo",
-      "isActive": true,
+      "isActive": false,
       "role": "Sales Associate",
       "salary": 540
-    },
-    {
-      "id": 5,
-      "name": "Morissa Plenderleith",
-      "email": "mplenderleith4@craigslist.org",
-      "company": "Topicshots",
-      "isActive": false,
-      "role": "Quality Engineer",
-      "salary": 1430
     },
     {
       "id": 6,
       "name": "Alejandro Vivas",
       "email": "ajvivas86@gmail.com",
       "company": "Carsales",
-      "salary": 0,
+      "salary": 1000,
+      "role": "",
+      "isActive": true
+    },
+    {
+      "id": 7,
+      "name": "Arlenis Hidalgo",
+      "email": "marlesdream@gmail.com",
+      "company": "Fairy Dreams SpA",
+      "salary": 2500,
+      "role": "",
+      "isActive": true
+    },
+    {
+      "id": 8,
+      "name": "Grissy Vivas",
+      "email": "grissvi@gmail.com",
+      "company": "N/A",
+      "salary": 230,
       "role": "",
       "isActive": true
     }

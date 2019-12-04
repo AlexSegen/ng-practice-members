@@ -33,11 +33,29 @@ export class MembersComponent implements OnInit {
   }
 
   updateSalary(val) {
-    this._memberService.updateMemberSalary(this.editingSalaryId, val).then(() => {
+    this._memberService.updateMemberSalary(this.editingSalaryId,  val).subscribe(
+      res => {
+        let tmp = this.members;
+        let index = tmp.findIndex(i => i.id == this.editingSalaryId);
+        tmp[index] = res;
+        this.members = tmp;
+        this.editMode = false;
+        this.editingSalaryId = 0
+        utils.notification('info', 'Member updated')
+      },
+      error => {
+        console.log(error.message)
+        utils.notification('error', error.message)
+      },
+      () => {
+        this.isLoading = false;
+      })
+    
+    /* .then(() => {
       this.editMode = false;
       this.editingSalaryId = 0
       utils.notification('info', 'Member salary updated to $' + val)
-    })
+    }) */
   }
 
   toggleUpdateSalary(val:Boolean, memberId:Number) {
@@ -54,14 +72,26 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  deleteMember(member): void  {
+  deleteMember(member:Member): void  {
     utils.dialog('warning', 'Confirm this action').then(value => {
       if(value) {
         this.isLoading = true;
-        this._memberService.deleteMember(member).then(() => {
-          utils.notification('warning', 'Member deleted')
-          this.isLoading = false;
-        })
+        this._memberService.deleteMember(member).subscribe(
+          () => {
+            let tmp = this.members;
+            let index = tmp.findIndex(i => i.id == member.id);
+            tmp.splice(index, 1);
+            this.members = tmp;
+            utils.notification('warning', 'Member deleted')
+          },
+          error => {
+            console.log(error.message)
+            utils.notification('error', error.message)
+          },
+          () => {
+            this.isLoading = false;
+          }
+        );
       }
     })
   }
@@ -84,28 +114,43 @@ export class MembersComponent implements OnInit {
 
   setMember(): void {
     this.isLoading = true;
-    setTimeout(() => {
+
       if (this.selectedMember.id == 0) {
 
-        /* this._memberService.addMember(this.selectedMember).then(data=> {
-          this.resetform()
-          utils.notification('success', 'Member added')
-        }).catch(error => {
-          utils.notification('error', error)
-        }).finally(() => {
-          this.isLoading = false;
-        }) */
+        this._memberService.addMember(this.selectedMember).subscribe(
+          member => {
+            this.members.push(member)
+            this.resetform()
+            utils.notification('success', 'Member added')
+          },
+          error => {
+            console.log(error.message)
+            utils.notification('error', error.message)
+          },
+          () => {
+            this.isLoading = false;
+          }
+          );
       } else {
-        this._memberService.updateMember(this.selectedMember.id, this.selectedMember).subscribe(
-          val => {
-            console.log(val)
+        this._memberService.updateMember(this.selectedMember).subscribe(
+          res => {
+            let tmp = this.members;
+            let index = tmp.findIndex(i => i.id == this.selectedMember.id);
+            tmp[index] = res;
+            this.members = tmp;
             this.isLoading = false
             utils.notification('info', 'Member updated')
+          },
+          error => {
+            console.log(error.message)
+            utils.notification('error', error.message)
+          },
+          () => {
+            this.isLoading = false;
           }
         );
       }
-      
-    }, 1500);
+
   }
 
 }

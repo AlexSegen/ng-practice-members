@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {map} from 'rxjs/operators'; 
 import { Observable } from 'rxjs';
 
+import { HttpHeaders } from '@angular/common/http';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+    //'Authorization': 'my-auth-token'
+  })
+};
 
 import { Member } from '../models/member'
 
@@ -26,38 +33,19 @@ export class MemberService {
     return this._http.get<Member[]>(this.url)
   }
 
-  addMember(member:Member) {
-    return this._http.post(this.url, member);
+  addMember(member:Member): Observable<Member> {
+    return this._http.post<Member>(this.url, member, httpOptions);
   }
 
-  updateMember(memberId: Number, payload) {
-    return this._http.put(this.url + "/"  + memberId, payload);
+  updateMember(member:Member): Observable<Member> {
+    return this._http.put<Member>(this.url + "/"  + member.id, member);
   }
 
-  updateMemberSalary(memberId: Number, newSalary: Number) {
-    return new Promise((resolve, reject) => {
-      let tmp = this.members;
-      let index = tmp.findIndex(i => i.id == memberId);
-
-      if(index != -1) {
-        tmp[index].salary = newSalary;
-        this.members = tmp;
-        resolve(tmp[index])
-      }
-      reject("Member not found")
-    })
+  updateMemberSalary(memberId: Number, newSalary: Number): Observable<Member> {
+    return this._http.patch<Member>(this.url + "/"  + memberId, {salary: newSalary});
   }
 
   deleteMember(member: Member) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        let index = this.members.findIndex(i => i.id == member.id);
-        if(index != -1) {
-          this.members.splice(index, 1);
-          resolve(true)
-        }
-        reject("Member not found")
-      }, 500);
-    })
+    return this._http.delete<Member>(this.url + "/"  + member.id, httpOptions);
   }
 }
