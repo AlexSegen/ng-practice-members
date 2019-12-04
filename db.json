@@ -15,7 +15,7 @@
       "email": "mcrocken2@house.gov",
       "company": "Twinder",
       "isActive": true,
-      "role": "Research Assistant I",
+      "role": "Research Assistant",
       "salary": 1826
     },
     {
@@ -33,7 +33,7 @@
       "email": "ajvivas86@gmail.com",
       "company": "Carsales",
       "salary": 1000,
-      "role": "",
+      "role": "Web Developer",
       "isActive": true
     },
     {
@@ -42,7 +42,7 @@
       "email": "marlesdream@gmail.com",
       "company": "Fairy Dreams SpA",
       "salary": 2500,
-      "role": "",
+      "role": "Nurse and Nails Designer",
       "isActive": true
     },
     {
@@ -51,7 +51,7 @@
       "email": "grissvi@gmail.com",
       "company": "N/A",
       "salary": 230,
-      "role": "",
+      "role": "House Queen",
       "isActive": true
     }
   ]
