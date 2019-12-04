@@ -12,7 +12,7 @@ import utils from '../helpers/utils'
 })
 export class MembersComponent implements OnInit {
 
-  members:Array<Member>;
+  public members:Array<any>;
   selectedMember:Member;
   requestResult;
   isLoading:Boolean;
@@ -46,8 +46,11 @@ export class MembersComponent implements OnInit {
   }
 
   getMembers(): void {
-    this._memberService.getMembers().subscribe((data: any[])=>{
-      this.members = data;
+    this._memberService.getMembers().subscribe(res => {
+      this.members = res;
+    },
+    error => {
+      console.log(error.message)
     });
   }
 
@@ -83,15 +86,8 @@ export class MembersComponent implements OnInit {
     this.isLoading = true;
     setTimeout(() => {
       if (this.selectedMember.id == 0) {
-        this._memberService.addMember(this.selectedMember).subscribe(
-          val => {
-            console.log(val)
-            this.members.push(val)
-            this.isLoading = false
-            utils.notification('info', 'Member updated')
-          }
-        );
-       /*  this._memberService.addMember(this.selectedMember).then(data=> {
+
+        /* this._memberService.addMember(this.selectedMember).then(data=> {
           this.resetform()
           utils.notification('success', 'Member added')
         }).catch(error => {

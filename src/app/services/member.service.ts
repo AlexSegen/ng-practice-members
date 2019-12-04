@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import {map} from 'rxjs/operators'; 
+import { Observable } from 'rxjs';
 
 
 import { Member } from '../models/member'
@@ -20,13 +22,8 @@ export class MemberService {
     this.members = []
    }
 
-  /* getMembers(): Member[] {
-
-    return this.members;
-  } */
-
-  public getMembers(){
-    return this._http.get(this.url);
+  public getMembers(): Observable<Member[]> {
+    return this._http.get<Member[]>(this.url)
   }
 
   addMember(member:Member) {
