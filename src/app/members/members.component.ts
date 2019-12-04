@@ -12,20 +12,20 @@ import utils from '../helpers/utils'
 })
 export class MembersComponent implements OnInit {
 
-  public members:Array<any>;
-  selectedMember:Member;
+  public members: Array<any>;
+  selectedMember: Member;
   requestResult;
-  isLoading:Boolean;
-  editMode:Boolean;
+  isLoading: Boolean;
+  editMode: Boolean;
 
   editingSalaryId: Number;
-  
+
   constructor(private _memberService: MemberService) {
     this.isLoading = false;
     this.requestResult = false;
     this.editMode = false;
     this.editingSalaryId = 0
-    this.selectedMember = new Member(0, "", "", "", 0, "", false );
+    this.selectedMember = new Member(0, "", "", "", 0, "", false);
   }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class MembersComponent implements OnInit {
   }
 
   updateSalary(val) {
-    this._memberService.updateMemberSalary(this.editingSalaryId,  val).subscribe(
+    this._memberService.updateMemberSalary(this.editingSalaryId, val).subscribe(
       res => {
         let tmp = this.members;
         let index = tmp.findIndex(i => i.id == this.editingSalaryId);
@@ -50,15 +50,9 @@ export class MembersComponent implements OnInit {
       () => {
         this.isLoading = false;
       })
-    
-    /* .then(() => {
-      this.editMode = false;
-      this.editingSalaryId = 0
-      utils.notification('info', 'Member salary updated to $' + val)
-    }) */
   }
 
-  toggleUpdateSalary(val:Boolean, memberId:Number) {
+  toggleUpdateSalary(val: Boolean, memberId: Number) {
     this.editMode = val;
     val ? this.editingSalaryId = memberId : this.editingSalaryId = 0
   }
@@ -67,14 +61,14 @@ export class MembersComponent implements OnInit {
     this._memberService.getMembers().subscribe(res => {
       this.members = res;
     },
-    error => {
-      console.log(error.message)
-    });
+      error => {
+        console.log(error.message)
+      });
   }
 
-  deleteMember(member:Member): void  {
+  deleteMember(member: Member): void {
     utils.dialog('warning', 'Confirm this action').then(value => {
-      if(value) {
+      if (value) {
         this.isLoading = true;
         this._memberService.deleteMember(member).subscribe(
           () => {
@@ -97,7 +91,7 @@ export class MembersComponent implements OnInit {
   }
 
   resetform(): void {
-    this.selectedMember = new Member(0, "", "", "", 0, "", false );
+    this.selectedMember = new Member(0, "", "", "", 0, "", false);
   }
 
   getMember(member): void {
@@ -106,7 +100,7 @@ export class MembersComponent implements OnInit {
 
   handleForm() {
     utils.dialog('question', 'Confirm this action').then(value => {
-      if(value) {
+      if (value) {
         this.setMember()
       }
     })
@@ -115,42 +109,40 @@ export class MembersComponent implements OnInit {
   setMember(): void {
     this.isLoading = true;
 
-      if (this.selectedMember.id == 0) {
+    if (this.selectedMember.id == 0) {
 
-        this._memberService.addMember(this.selectedMember).subscribe(
-          member => {
-            this.members.push(member)
-            this.resetform()
-            utils.notification('success', 'Member added')
-          },
-          error => {
-            console.log(error.message)
-            utils.notification('error', error.message)
-          },
-          () => {
-            this.isLoading = false;
-          }
-          );
-      } else {
-        this._memberService.updateMember(this.selectedMember).subscribe(
-          res => {
-            let tmp = this.members;
-            let index = tmp.findIndex(i => i.id == this.selectedMember.id);
-            tmp[index] = res;
-            this.members = tmp;
-            this.isLoading = false
-            utils.notification('info', 'Member updated')
-          },
-          error => {
-            console.log(error.message)
-            utils.notification('error', error.message)
-          },
-          () => {
-            this.isLoading = false;
-          }
-        );
-      }
-
+      this._memberService.addMember(this.selectedMember).subscribe(
+        member => {
+          this.members.push(member)
+          this.resetform()
+          utils.notification('success', 'Member added')
+        },
+        error => {
+          console.log(error.message)
+          utils.notification('error', error.message)
+        },
+        () => {
+          this.isLoading = false;
+        }
+      );
+    } else {
+      this._memberService.updateMember(this.selectedMember).subscribe(
+        res => {
+          let tmp = this.members;
+          let index = tmp.findIndex(i => i.id == this.selectedMember.id);
+          tmp[index] = res;
+          this.members = tmp;
+          this.isLoading = false
+          utils.notification('info', 'Member updated')
+        },
+        error => {
+          console.log(error.message)
+          utils.notification('error', error.message)
+        },
+        () => {
+          this.isLoading = false;
+        }
+      );
+    }
   }
-
 }

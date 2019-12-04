@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-sm-12">
-                <h3>Members</h3>
+            <h3>Members</h3>
         </div>
     </div>
 </div>
@@ -17,33 +17,40 @@
                     <div>
                         <input type="hidden" [(ngModel)]="selectedMember.id">
                         <div class="form-group">
-                            <input [disabled]="isLoading" type="text" [(ngModel)]="selectedMember.name" class="form-control" placeholder="Name">
+                            <input [disabled]="isLoading" type="text" [(ngModel)]="selectedMember.name"
+                                class="form-control" placeholder="Name">
                         </div>
                         <div class="form-group">
-                            <input [disabled]="isLoading" type="email" [(ngModel)]="selectedMember.email" class="form-control" placeholder="Email">
+                            <input [disabled]="isLoading" type="email" [(ngModel)]="selectedMember.email"
+                                class="form-control" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input [disabled]="isLoading" type="text" [(ngModel)]="selectedMember.company" class="form-control" placeholder="Company">
+                            <input [disabled]="isLoading" type="text" [(ngModel)]="selectedMember.company"
+                                class="form-control" placeholder="Company">
                         </div>
                         <div class="form-group">
-                            <input [disabled]="isLoading" type="checkbox" id="isActive" class="form-control1 mr-2" [(ngModel)]="selectedMember.isActive" checked="selectedMember.isActive">
+                            <input [disabled]="isLoading" type="checkbox" id="isActive" class="form-control1 mr-2"
+                                [(ngModel)]="selectedMember.isActive" checked="selectedMember.isActive">
                             <label for="isActive">
-                                Is active 
+                                Is active
                             </label>
                         </div>
-                        
+
                         <div class="alert small text-xs p-2" *ngIf="requestResult">
                             {{requestResult}}
                         </div>
 
                         <div class="form-group row">
                             <div class="col-sm-8 d-flex">
-                                    <button *ngIf="selectedMember.id == '0'; else updateBlock" (click)="handleForm()" [disabled]="isLoading" class="btn btn-primary" type="button">Create</button>
-                                    <ng-template #updateBlock>
-                                        <button (click)="handleForm()" [disabled]="isLoading" class="btn btn-info" type="button">Update</button>
-                                    </ng-template>
-                                    
-                                    <button (click)="resetform()"  [disabled]="isLoading" class="btn btn-link text-muted" type="button">Clear</button>
+                                <button *ngIf="selectedMember.id == '0'; else updateBlock" (click)="handleForm()"
+                                    [disabled]="isLoading" class="btn btn-primary" type="button">Create</button>
+                                <ng-template #updateBlock>
+                                    <button (click)="handleForm()" [disabled]="isLoading" class="btn btn-info"
+                                        type="button">Update</button>
+                                </ng-template>
+
+                                <button (click)="resetform()" [disabled]="isLoading" class="btn btn-link text-muted"
+                                    type="button">Clear</button>
                             </div>
                             <div class="col-sm-4" *ngIf="isLoading">
                                 <div class="clearfix">
@@ -52,7 +59,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -72,30 +79,37 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let member of members">
-                            <td> 
-                                <div *ngIf="member.isActive; else inactiveBlock" class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
+                            <td>
+                                <div *ngIf="member.isActive; else inactiveBlock"
+                                    class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
                                 <ng-template #inactiveBlock>
-                                    <i  class="fa fa-circle text-muted mr-1"></i>
+                                    <i class="fa fa-circle text-muted mr-1"></i>
                                 </ng-template>
                                 {{ member.name }} <br>
-                            <span class="text-muted small">ID: {{ member.id }}</span></td>
+                                <span class="text-muted small">ID: {{ member.id }}</span>
+                            </td>
                             <td>{{ member.email }}</td>
                             <td>{{ member.company }}</td>
                             <td class="text-right" style="width: 200px;">
                                 <div *ngIf="editMode && editingSalaryId == member.id; else elseBlock">
-                                    <price-input (salaryChange)='updateSalary($event)' (editChange)='toggleUpdateSalary($event)' [editingsalary]="member.salary"></price-input>
+                                    <price-input (salaryChange)='updateSalary($event)'
+                                        (editChange)='toggleUpdateSalary($event)' [editingsalary]="member.salary">
+                                    </price-input>
                                 </div>
                                 <ng-template #elseBlock>
-                                    <a href="javascript:void(0);" class="d-flex" (click)="toggleUpdateSalary(true, member.id)">
+                                    <a href="javascript:void(0);" class="d-flex"
+                                        (click)="toggleUpdateSalary(true, member.id)">
                                         $ {{ member.salary | formatCurrency }}
                                     </a>
                                 </ng-template>
                             </td>
                             <td class="d-flex">
-                                <button type="button" (click)="getMember(member)"   class="btn btn-link btn-sm text-success">
+                                <button type="button" (click)="getMember(member)"
+                                    class="btn btn-link btn-sm text-success">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <button type="button" (click)="deleteMember(member)" class="btn btn-link btn-sm text-danger">
+                                <button type="button" (click)="deleteMember(member)"
+                                    class="btn btn-link btn-sm text-danger">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
