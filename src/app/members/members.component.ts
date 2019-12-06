@@ -58,12 +58,12 @@ export class MembersComponent implements OnInit {
     this.isLoading = true;
     this._memberService.getMembers().subscribe(res => {
       this.members = res;
+      this.isLoading = false;
     },
     error => {
       console.log(error.message)
-    },
-    () => {
       this.isLoading = false;
+      utils.notification('error', error.message)
     })
   }
 

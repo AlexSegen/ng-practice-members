@@ -7,7 +7,7 @@
       "company": "Twinder",
       "isActive": true,
       "role": "Research Assistant",
-      "salary": 1826
+      "salary": 1226
     },
     {
       "id": 6,
@@ -16,7 +16,7 @@
       "company": "Carsales",
       "salary": 3000,
       "role": "Web Developer",
-      "isActive": false
+      "isActive": true
     },
     {
       "id": 7,
@@ -47,7 +47,7 @@
     },
     {
       "id": 10,
-      "name": "Luis",
+      "name": "Luis Ignacio",
       "email": "Ramirez",
       "company": "Tesla",
       "salary": 3100,
