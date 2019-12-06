@@ -8,14 +8,16 @@ import { AppComponent } from './app.component';
 import { MembersComponent } from './members/members.component';
 import { PriceInputComponent } from './members/price-input/price-input.component';
 
-import { CurrencyPipe } from './pipes/currency.pipe'
+import { CurrencyPipe } from './pipes/currency.pipe';
+import { PhonesComponent } from './phones/phones.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     MembersComponent,
     PriceInputComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    PhonesComponent
   ],
   imports: [
     BrowserModule,
