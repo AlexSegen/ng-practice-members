@@ -1,0 +1,58 @@
+{
+  "members": [
+    {
+      "id": 3,
+      "name": "Manya Crocken",
+      "email": "mcrocken2@house.gov",
+      "company": "Twinder",
+      "isActive": true,
+      "role": "Research Assistant",
+      "salary": 1226
+    },
+    {
+      "id": 6,
+      "name": "Alejandro Vivas",
+      "email": "ajvivas86@gmail.com",
+      "company": "Carsales",
+      "salary": 3000,
+      "role": "Web Developer",
+      "isActive": true
+    },
+    {
+      "id": 7,
+      "name": "Arlenis Hidalgo Mosqueda",
+      "email": "marlesdream@gmail.com",
+      "company": "Fairy Dreams SpA",
+      "salary": 2500,
+      "role": "Nurse and Nails Designer",
+      "isActive": true
+    },
+    {
+      "id": 8,
+      "name": "Grissy Vivas",
+      "email": "grissvi@gmail.com",
+      "company": "N/A",
+      "salary": 2330,
+      "role": "House Queen",
+      "isActive": true
+    },
+    {
+      "id": 9,
+      "name": "José Daniel",
+      "email": "Carrasco",
+      "company": "N/A",
+      "salary": 1350,
+      "role": "N/A",
+      "isActive": true
+    },
+    {
+      "id": 10,
+      "name": "Luis Ignacio",
+      "email": "Ramirez",
+      "company": "Tesla",
+      "salary": 3100,
+      "role": "IA Developer",
+      "isActive": false
+    }
+  ]
+}
