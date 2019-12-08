@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Member } from '../models/member'
 import { MemberService } from '../services/member.service';
+import {RolesService} from '../services/roles.service'
 
 import utils from '../helpers/utils'
 
@@ -20,7 +21,9 @@ export class MembersComponent implements OnInit {
 
   editingSalaryId: Number;
 
-  constructor(private _memberService: MemberService) {
+  roles;
+
+  constructor(private _memberService: MemberService, private _rolesService: RolesService) {
     this.isLoading = false;
     this.requestResult = false;
     this.editMode = false;
@@ -30,6 +33,11 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() {
     this.getMembers()
+    this.getRoles()
+  }
+
+  getRoles() {
+    this.roles = this._rolesService.getRoles();
   }
 
   updateSalary(val) {

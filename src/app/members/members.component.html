@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xl-3 col-sm-4">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">Member Management</div>
                 <div class="card-body">
 
@@ -29,8 +29,11 @@
                                 class="form-control" placeholder="Company">
                         </div>
                         <div class="form-group">
-                            <input [disabled]="isLoading" type="text" [(ngModel)]="selectedMember.role"
-                                class="form-control" placeholder="Company Rol">
+                            <label for="">Rol</label>
+                            <select name="" id="" class="form-control" [(ngModel)]="selectedMember.role" [disabled]="isLoading">
+                                <option value="">Select role</option>
+                                <option  *ngFor="let role of roles" [value]="role">{{role}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <input [disabled]="isLoading" type="number" [(ngModel)]="selectedMember.salary"
@@ -72,6 +75,7 @@
                     </div>
                 </div>
             </div>
+            <app-roles></app-roles>
         </div>
         <div class="col-xl-9 col-sm-8">
             <div class="table-responsive">
@@ -81,7 +85,7 @@
                             <td>Name</td>
                             <td>Email</td>
                             <td>Company</td>
-                            <td>Rol</td>
+                            <td>Role</td>
                             <td style="width: 100px;" class="text-right">Salary</td>
                             <td></td>
                         </tr>

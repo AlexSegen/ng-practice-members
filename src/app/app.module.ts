@@ -8,14 +8,16 @@ import { AppComponent } from './app.component';
 import { MembersComponent } from './members/members.component';
 import { PriceInputComponent } from './members/price-input/price-input.component';
 
-import { CurrencyPipe } from './pipes/currency.pipe'
+import { CurrencyPipe } from './pipes/currency.pipe';
+import { RolesComponent } from './roles/roles.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     MembersComponent,
     PriceInputComponent,
-    CurrencyPipe
+    CurrencyPipe,
+    RolesComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { CurrencyPipe } from './pipes/currency.pipe'
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
