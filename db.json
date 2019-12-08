@@ -53,6 +53,15 @@
       "salary": 3300,
       "role": "IA Designer",
       "isActive": true
+    },
+    {
+      "name": "Esteban Dido",
+      "email": "estedido@mail.com",
+      "company": "N/A",
+      "salary": 0,
+      "role": "N/A",
+      "isActive": false,
+      "id": 12
     }
   ]
 }
