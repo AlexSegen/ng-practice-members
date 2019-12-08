@@ -8,8 +8,8 @@ export class Member {
     isActive:Boolean;
     role:String;
 
-    constructor(id, name, email, company, salary, role, active) {
-        this.id = id;
+    constructor(name?:String, email?:String, company?:String, salary?:Number, role?:String, active?:Boolean) {
+        this.id = 0;
         this.name = name;
         this.email = email;
         this.company = company;

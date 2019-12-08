@@ -25,7 +25,7 @@ export class MembersComponent implements OnInit {
     this.requestResult = false;
     this.editMode = false;
     this.editingSalaryId = 0
-    this.selectedMember = new Member(0, "", "", "", 0, "", false);
+    this.selectedMember = new Member();
   }
 
   ngOnInit() {
@@ -89,7 +89,7 @@ export class MembersComponent implements OnInit {
   }
 
   resetform(): void {
-    this.selectedMember = new Member(0, "", "", "", 0, "", false);
+    this.selectedMember = new Member();
   }
 
   getMember(member): void {
