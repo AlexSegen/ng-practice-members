@@ -58,10 +58,19 @@
       "name": "Esteban Dido",
       "email": "estedido@mail.com",
       "company": "N/A",
-      "salary": 0,
+      "salary": 1500,
       "role": "Frontend Developer",
-      "isActive": false,
+      "isActive": true,
       "id": 12
+    },
+    {
+      "role": "DevOps",
+      "id": 13,
+      "name": "Dalia Tucupita",
+      "email": "dalila@mail.com",
+      "company": "Carsales",
+      "salary": 2000,
+      "isActive": true
     }
   ]
 }

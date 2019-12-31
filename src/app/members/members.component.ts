@@ -3,6 +3,8 @@ import { Member } from '../models/member'
 import { MemberService } from '../services/member.service';
 import {RolesService} from '../services/roles.service'
 
+import validator from 'validator'
+
 import utils from '../helpers/utils'
 
 
@@ -13,8 +15,8 @@ import utils from '../helpers/utils'
 })
 export class MembersComponent implements OnInit {
 
-  public members: Array<any>;
   selectedMember: Member;
+  members: Array<Member>;
   requestResult;
   isLoading: Boolean;
   editMode: Boolean;
@@ -105,11 +107,43 @@ export class MembersComponent implements OnInit {
   }
 
   handleForm() {
+    
+    if(!this.handleValidation().valid) {
+      utils.notification('error', this.handleValidation().message);
+      return false
+    }
+
     utils.dialog('question', 'Confirm this action').then(value => {
       if (value) {
         this.setMember()
       }
     })
+  }
+
+  handleValidation() : any {
+    if(validator.isEmpty(this.selectedMember.name) ||
+      !validator.isLength(this.selectedMember.name)) {
+      return {
+        valid: false,
+        message: "Invalid name"
+      }
+    }
+
+    if(!validator.isEmail(this.selectedMember.email)) {
+      return {
+        valid: false,
+        message: "Invalid email"
+      }
+    }
+
+    if(!validator.isNumeric(this.selectedMember.salary.toString())) {
+      return {
+        valid: false,
+        message: "Invalid salary"
+      }
+    }
+
+    return true
   }
 
   setMember(): void {

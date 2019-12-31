@@ -1,4 +1,5 @@
 import {toastme, Toastme} from 'toastmejs'
+import validator from 'validator'
 
 const config = {
     timeout: 5000,
@@ -28,5 +29,25 @@ export default {
             type: type, // 'success', 'danger', 'warning', 'info' or 'question'
             dark: false, // Show dark theme? 'true' or 'false'
         })
+    },
+    validation : {
+        isEmpty(str:any): boolean {
+            return validator.isEmpty(str);
+        },
+        isEmail(str:any): boolean {
+            return validator.isEmail(str);
+        },
+        isAlpha(str:any): boolean {
+            return validator.isAlpha(str);
+        },
+        isDataURI(str:any): boolean {
+            return validator.isDataURI(str);
+        },
+        isLength(str:any): any {
+            return validator.isLength(str, [{min:3, max: undefined}]);
+        },
+        isNumeric(str:any): boolean {
+            return validator.isNumeric(str, [{no_symbols: true}])
+        }
     }
 }

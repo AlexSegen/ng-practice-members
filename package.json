@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server":"json-server --watch db.json --port 3000"
+    "server": "json-server --watch db.json --port 3000"
   },
   "private": true,
   "dependencies": {
@@ -20,12 +20,14 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "bootstrap": "^4.4.1",
     "moment": "^2.24.0",
     "numeral": "^2.0.6",
     "rxjs": "~6.4.0",
     "toastmejs": "^1.2.3",
     "tslib": "^1.10.0",
     "underscore": "^1.9.1",
+    "validator": "^12.1.0",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
