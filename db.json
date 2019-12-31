@@ -71,6 +71,24 @@
       "company": "Carsales",
       "salary": 2000,
       "isActive": true
+    },
+    {
+      "name": "Maria Estrada",
+      "email": "mari@mail.com",
+      "company": "Carsales",
+      "salary": 1800,
+      "role": "Mobile Developer",
+      "isActive": true,
+      "id": 14
+    },
+    {
+      "name": "Jhonatan Sánchez",
+      "email": "jsanchez@mail.com",
+      "company": "Carsales Std",
+      "salary": 1600,
+      "role": "Frontend Developer",
+      "isActive": true,
+      "id": 15
     }
   ]
 }

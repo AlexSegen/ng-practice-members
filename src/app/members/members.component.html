@@ -97,8 +97,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let member of members">
-                                    <td>
+                                <tr *ngFor="let member of members" [ngClass]="{tractive: member.id == selectedMember.id}">
+                                    <td (click)="getMember(member)" class="cursor-action">
                                         <div *ngIf="member.isActive; else inactiveBlock"
                                             class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
                                         <ng-template #inactiveBlock>
@@ -107,9 +107,9 @@
                                         {{ member.name }} <br>
                                         <span class="text-muted small">ID: {{ member.id }}</span>
                                     </td>
-                                    <td>{{ member.email }}</td>
-                                    <td>{{ member.company }}</td>
-                                    <td>{{ member.role }}</td>
+                                    <td (click)="getMember(member)" class="cursor-action">{{ member.email }}</td>
+                                    <td (click)="getMember(member)" class="cursor-action">{{ member.company }}</td>
+                                    <td (click)="getMember(member)" class="cursor-action">{{ member.role }}</td>
                                     <td class="text-right" >
                                         <div class="text-right" *ngIf="editMode && editingSalaryId == member.id; else elseBlock">
                                             <price-input (salaryChange)='updateSalary($event)'
@@ -124,10 +124,6 @@
                                         </ng-template>
                                     </td>
                                     <td class="d-flex">
-                                        <button type="button" (click)="getMember(member)"
-                                            class="btn btn-link btn-sm text-success">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
                                         <button type="button" (click)="deleteMember(member)"
                                             class="btn btn-link btn-sm text-danger">
                                             <i class="fa fa-trash"></i>

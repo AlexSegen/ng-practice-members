@@ -39,8 +39,9 @@ export default {
             return validator.isEmail(str);
         },
         isAlpha(str:any): Boolean {
-            const regex = /^(?! )[A-Za-z\s]*$/;
-            return regex.test(str.toString())
+            const containsLetters = /[a-zA-Z]/;
+            const containsNumbers = /\d+/;
+            return containsLetters.test(str.toString()) && !containsNumbers.test(str.toString())
         },
         isDataURI(str:String): Boolean {
             return validator.isDataURI(str);
@@ -54,3 +55,13 @@ export default {
         }
     }
 }
+
+/* var rgularExp = {
+    contains_alphaNumeric : /^(?!-)(?!.*-)[A-Za-z0-9-]+(?<!-)$/,
+    containsNumber : /\d+/,
+    containsAlphabet : /[a-zA-Z]/,
+
+    onlyLetters : /^[A-Za-z]+$/,
+    onlyNumbers : /^[0-9]+$/,
+    onlyMixOfAlphaNumeric : /^([0-9]+[a-zA-Z]+|[a-zA-Z]+[0-9]+)[0-9a-zA-Z]*$/
+} */

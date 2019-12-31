@@ -138,6 +138,7 @@ export class MembersComponent implements OnInit {
         message: "Name cannot contain numbers"
       }
     }
+    
 
     if(!utils.validation.isEmail(this.selectedMember.email)) {
       return {

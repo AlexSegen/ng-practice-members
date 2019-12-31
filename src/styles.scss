@@ -7,6 +7,18 @@ body {
 }
 
 
+a {
+    color: #02aea8;
+}
+
+.cursor-action {
+    cursor: pointer;
+}
+
+.tractive {
+    background: rgba(2, 169, 173, 0.12);
+}
+
 .btn {
     &.btn-primary {
         border: none;
@@ -36,6 +48,7 @@ body {
     border: none;
     background: #fff;
     border-radius: 10px;
+    overflow: hidden;
     box-shadow: 0 10px 10px rgba(#000, .05);
 
     &-header {
