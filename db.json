@@ -28,15 +28,6 @@
       "isActive": true
     },
     {
-      "id": 9,
-      "name": "José Daniel Carrasco",
-      "email": "jcarrasco@gmail.com",
-      "company": "N/A",
-      "salary": 1350,
-      "role": "Frontend Developer",
-      "isActive": true
-    },
-    {
       "id": 10,
       "name": "Luis Ignacio Ramirez Pérez",
       "email": "lramirez@tesla.com",
