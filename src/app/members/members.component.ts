@@ -3,10 +3,7 @@ import { Member } from '../models/member'
 import { MemberService } from '../services/member.service';
 import {RolesService} from '../services/roles.service'
 
-import validator from 'validator'
-
 import utils from '../helpers/utils'
-
 
 @Component({
   selector: 'app-members',
@@ -121,29 +118,45 @@ export class MembersComponent implements OnInit {
   }
 
   handleValidation() : any {
-    if(validator.isEmpty(this.selectedMember.name) ||
-      !validator.isLength(this.selectedMember.name)) {
+    if(utils.validation.isEmpty(this.selectedMember.name)) {
       return {
         valid: false,
-        message: "Invalid name"
+        message: "Name cannot be empty"
       }
     }
 
-    if(!validator.isEmail(this.selectedMember.email)) {
+    if(!utils.validation.isLength(this.selectedMember.name)) {
+      return {
+        valid: false,
+        message: "Name is too short"
+      }
+    }
+
+    if(!utils.validation.isAlpha(this.selectedMember.name)) {
+      return {
+        valid: false,
+        message: "Name cannot contain numbers"
+      }
+    }
+
+    if(!utils.validation.isEmail(this.selectedMember.email)) {
       return {
         valid: false,
         message: "Invalid email"
       }
     }
 
-    if(!validator.isNumeric(this.selectedMember.salary.toString())) {
+    if(!utils.validation.isNumeric(this.selectedMember.salary)) {
       return {
         valid: false,
         message: "Invalid salary"
       }
     }
 
-    return true
+    return {
+      valid: true,
+      message: "Validation passed!"
+    }
   }
 
   setMember(): void {

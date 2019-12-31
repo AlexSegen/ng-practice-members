@@ -24,30 +24,33 @@ export default {
             title: "",
             text: text,
             textConfirm: "Confirm",
-            textCancel: "Cancel", 
+            textCancel: "Cancel",
+            duplicates: false, 
             showCancel: true, // true or false
             type: type, // 'success', 'danger', 'warning', 'info' or 'question'
             dark: false, // Show dark theme? 'true' or 'false'
         })
     },
     validation : {
-        isEmpty(str:any): boolean {
-            return validator.isEmpty(str);
+        isEmpty(str:any): Boolean {
+            return str.toString().trim().length == 0
         },
-        isEmail(str:any): boolean {
+        isEmail(str:String): Boolean {
             return validator.isEmail(str);
         },
-        isAlpha(str:any): boolean {
-            return validator.isAlpha(str);
+        isAlpha(str:any): Boolean {
+            const regex = /^(?! )[A-Za-z\s]*$/;
+            return regex.test(str.toString())
         },
-        isDataURI(str:any): boolean {
+        isDataURI(str:String): Boolean {
             return validator.isDataURI(str);
         },
-        isLength(str:any): any {
-            return validator.isLength(str, [{min:3, max: undefined}]);
+        isLength(str:String): Boolean {
+            return str.toString().trim().length > 2
         },
-        isNumeric(str:any): boolean {
-            return validator.isNumeric(str, [{no_symbols: true}])
+        isNumeric(str:any): Boolean {
+            const regex = /^[0-9]+$/
+            return regex.test(str)
         }
     }
 }
