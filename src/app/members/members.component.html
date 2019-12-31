@@ -1,8 +1,6 @@
-<div class="container-fluid mt-5">
-    <div class="row">
-        <div class="col-sm-12">
-            <h3>Members</h3>
-        </div>
+<div class="title-area">
+    <div class="container-fluid">
+        <h3>Members</h3>
     </div>
 </div>
 
@@ -27,9 +25,8 @@
                                 class="form-control" placeholder="Company">
                         </div>
                         <div class="form-group">
-                            <label for="">Rol</label>
                             <select name="" id="" class="form-control" [(ngModel)]="selectedMember.role" [disabled]="isLoading">
-                                <option value="">Select role</option>
+                                <option value="">Select rol</option>
                                 <option  *ngFor="let role of roles" [value]="role">{{role}}</option>
                             </select>
                         </div>
@@ -52,10 +49,10 @@
                         <div class="form-group row">
                             <div class="col-sm-8 d-flex">
                                 <button *ngIf="selectedMember.id == '0'; else updateBlock" (click)="handleForm()"
-                                    [disabled]="isLoading" class="btn btn-primary" type="button">Create</button>
+                                    [disabled]="isLoading" class="btn btn-primary" type="button">Create member</button>
                                 <ng-template #updateBlock>
                                     <button (click)="handleForm()" [disabled]="isLoading" class="btn btn-info"
-                                        type="button">Update</button>
+                                        type="button">Update member</button>
                                 </ng-template>
 
                                 <button (click)="resetform()" [disabled]="isLoading" class="btn btn-link text-muted"
@@ -76,58 +73,71 @@
             <app-roles></app-roles>
         </div>
         <div class="col-xl-9 col-sm-8">
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>Name</td>
-                            <td>Email</td>
-                            <td>Company</td>
-                            <td>Role</td>
-                            <td style="width: 100px;" class="text-right">Salary</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let member of members">
-                            <td>
-                                <div *ngIf="member.isActive; else inactiveBlock"
-                                    class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
-                                <ng-template #inactiveBlock>
-                                    <i class="fa fa-circle text-muted mr-1"></i>
-                                </ng-template>
-                                {{ member.name }} <br>
-                                <span class="text-muted small">ID: {{ member.id }}</span>
-                            </td>
-                            <td>{{ member.email }}</td>
-                            <td>{{ member.company }}</td>
-                            <td>{{ member.role }}</td>
-                            <td class="text-right" >
-                                <div class="text-right" *ngIf="editMode && editingSalaryId == member.id; else elseBlock">
-                                    <price-input (salaryChange)='updateSalary($event)'
-                                        (editChange)='toggleUpdateSalary($event)' [editingsalary]="member.salary">
-                                    </price-input>
-                                </div>
-                                <ng-template #elseBlock>
-                                    <a href="javascript:void(0);" 
-                                        (click)="toggleUpdateSalary(true, member.id)">
-                                        $ {{ member.salary | formatCurrency }}
-                                    </a>
-                                </ng-template>
-                            </td>
-                            <td class="d-flex">
-                                <button type="button" (click)="getMember(member)"
-                                    class="btn btn-link btn-sm text-success">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button type="button" (click)="deleteMember(member)"
-                                    class="btn btn-link btn-sm text-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-sm-9">Members list</div>
+                        <div class="col-sm-3 text-right">
+                            <button class="btn btn-primary btn-sm" type="button">New member</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover  table-borderless">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Email</td>
+                                    <td>Company</td>
+                                    <td>Role</td>
+                                    <td style="width: 100px;" class="text-right">Salary</td>
+                                    <td></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let member of members">
+                                    <td>
+                                        <div *ngIf="member.isActive; else inactiveBlock"
+                                            class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
+                                        <ng-template #inactiveBlock>
+                                            <i class="fa fa-circle text-muted mr-1"></i>
+                                        </ng-template>
+                                        {{ member.name }} <br>
+                                        <span class="text-muted small">ID: {{ member.id }}</span>
+                                    </td>
+                                    <td>{{ member.email }}</td>
+                                    <td>{{ member.company }}</td>
+                                    <td>{{ member.role }}</td>
+                                    <td class="text-right" >
+                                        <div class="text-right" *ngIf="editMode && editingSalaryId == member.id; else elseBlock">
+                                            <price-input (salaryChange)='updateSalary($event)'
+                                                (editChange)='toggleUpdateSalary($event)' [editingsalary]="member.salary">
+                                            </price-input>
+                                        </div>
+                                        <ng-template #elseBlock>
+                                            <a href="javascript:void(0);" 
+                                                (click)="toggleUpdateSalary(true, member.id)">
+                                                $ {{ member.salary | formatCurrency }}
+                                            </a>
+                                        </ng-template>
+                                    </td>
+                                    <td class="d-flex">
+                                        <button type="button" (click)="getMember(member)"
+                                            class="btn btn-link btn-sm text-success">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
+                                        <button type="button" (click)="deleteMember(member)"
+                                            class="btn btn-link btn-sm text-danger">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

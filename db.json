@@ -71,15 +71,6 @@
       "company": "Carsales",
       "salary": 2000,
       "isActive": true
-    },
-    {
-      "name": "Alejandro Vivas",
-      "email": "ajvivas86@gmail.com",
-      "company": "",
-      "salary": 15000,
-      "role": "DevOps",
-      "id": 14,
-      "isActive": true
     }
   ]
 }
