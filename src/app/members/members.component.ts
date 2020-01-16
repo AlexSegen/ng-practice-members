@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from '../models/member'
+import { Member } from '../models/member';
 import { MemberService } from '../services/member.service';
-import {RolesService} from '../services/roles.service'
+import {RolesService} from '../services/roles.service';
 
-import utils from '../helpers/utils'
+import utils from '../helpers/utils';
 
 @Component({
   selector: 'app-members',
@@ -14,11 +14,11 @@ export class MembersComponent implements OnInit {
 
   selectedMember: Member;
   members: Array<Member>;
-  requestResult;
-  isLoading: Boolean;
-  editMode: Boolean;
+  requestResult: any;
+  isLoading: boolean;
+  editMode: boolean;
 
-  editingSalaryId: Number;
+  editingSalaryId: number;
 
   roles;
 
@@ -26,39 +26,37 @@ export class MembersComponent implements OnInit {
     this.isLoading = false;
     this.requestResult = false;
     this.editMode = false;
-    this.editingSalaryId = 0
+    this.editingSalaryId = 0;
     this.selectedMember = new Member();
   }
 
   ngOnInit() {
-    this.getMembers()
-    this.getRoles()
+    this.getMembers();
+    this.getRoles();
   }
 
   getRoles() {
     this.roles = this._rolesService.getRoles();
   }
 
-  updateSalary(val) {
+  updateSalary(val: number) {
     this._memberService.updateMemberSalary(this.editingSalaryId, val).subscribe(
       res => {
-        this.members[this.members.findIndex(i => i.id == this.editingSalaryId)] = res
+        this.members[this.members.findIndex(i => i.id === this.editingSalaryId)] = res;
         this.editMode = false;
-        this.editingSalaryId = 0
-        utils.notification('info', 'Member updated')
+        this.editingSalaryId = 0;
+        utils.notification('info', 'Member updated');
       },
       error => {
-        console.log(error.message)
-        utils.notification('error', error.message)
-      },
-      () => {
+        console.log(error.message);
         this.isLoading = false;
-      })
+        utils.notification('error', error.message);
+      });
   }
 
-  toggleUpdateSalary(val: Boolean, memberId: Number) {
+  toggleUpdateSalary(val: boolean, memberId: number) {
     this.editMode = val;
-    val ? this.editingSalaryId = memberId : this.editingSalaryId = 0
+    val ? this.editingSalaryId = memberId : this.editingSalaryId = 0;
   }
 
   getMembers(): void {
@@ -68,31 +66,32 @@ export class MembersComponent implements OnInit {
       this.isLoading = false;
     },
     error => {
-      console.log(error.message)
+      console.log(error.message);
       this.isLoading = false;
-      utils.notification('error', error.message)
-    })
+      utils.notification('error', error.message);
+    });
   }
 
   deleteMember(member: Member): void {
     utils.dialog('warning', 'Confirm this action').then(value => {
       if (value) {
+        this.members.splice(this.members.findIndex(i => i.id == member.id), 1);
         this.isLoading = true;
         this._memberService.deleteMember(member).subscribe(
           () => {
-            this.members.splice(this.members.findIndex(i => i.id == member.id), 1);
-            utils.notification('warning', 'Member deleted')
+            utils.notification('warning', 'Member deleted');
           },
           error => {
-            console.log(error.message)
-            utils.notification('error', error.message)
+            this.members.splice(this.members.findIndex(i => i.id == member.id), 1, member);
+            console.log(error.message);
+            utils.notification('error', error.message);
           },
           () => {
             this.isLoading = false;
           }
         );
       }
-    })
+    });
   }
 
   resetform(): void {
@@ -100,98 +99,88 @@ export class MembersComponent implements OnInit {
   }
 
   getMember(member): void {
-    this.selectedMember = member
+    this.selectedMember = member;
   }
 
   handleForm() {
-    
-    if(!this.handleValidation().valid) {
+
+    if (!this.handleValidation().valid) {
       utils.notification('error', this.handleValidation().message);
-      return false
+      return false;
     }
 
-    utils.dialog('question', 'Confirm this action').then(value => {
-      if (value) {
-        this.setMember()
-      }
-    })
+    this.setMember();
   }
 
   handleValidation() : any {
-    if(utils.validation.isEmpty(this.selectedMember.name)) {
+    if (utils.validation.isEmpty(this.selectedMember.name)) {
       return {
         valid: false,
-        message: "Name cannot be empty"
-      }
+        message: 'Name cannot be empty'
+      };
     }
 
-    if(!utils.validation.isLength(this.selectedMember.name)) {
+    if (!utils.validation.isLength(this.selectedMember.name)) {
       return {
         valid: false,
-        message: "Name is too short"
-      }
+        message: 'Name is too short'
+      };
     }
 
-    if(!utils.validation.isAlpha(this.selectedMember.name)) {
+    if (!utils.validation.isAlpha(this.selectedMember.name)) {
       return {
         valid: false,
-        message: "Name cannot contain numbers"
-      }
-    }
-    
-
-    if(!utils.validation.isEmail(this.selectedMember.email)) {
-      return {
-        valid: false,
-        message: "Invalid email"
-      }
+        message: 'Name cannot contain numbers'
+      };
     }
 
-    if(!utils.validation.isNumeric(this.selectedMember.salary)) {
+    if (!utils.validation.isEmail(this.selectedMember.email)) {
       return {
         valid: false,
-        message: "Invalid salary"
-      }
+        message: 'Invalid email'
+      };
+    }
+
+    if (!utils.validation.isNumeric(this.selectedMember.salary)) {
+      return {
+        valid: false,
+        message: 'Invalid salary'
+      };
     }
 
     return {
       valid: true,
-      message: "Validation passed!"
-    }
+      message: 'Validation passed!'
+    };
   }
 
   setMember(): void {
     this.isLoading = true;
 
-    if (this.selectedMember.id == 0) {
+    if (this.selectedMember.id === 0) {
 
       this._memberService.addMember(this.selectedMember).subscribe(
         member => {
-          this.members.push(member)
-          this.resetform()
-          utils.notification('success', 'Member added')
+          this.members.push(member);
+          this.resetform();
+          utils.notification('success', 'Member added');
         },
         error => {
-          console.log(error.message)
-          utils.notification('error', error.message)
-        },
-        () => {
+          console.log(error.message);
           this.isLoading = false;
-        }
-      );
+          utils.notification('error', error.message);
+        });
     } else {
       this._memberService.updateMember(this.selectedMember).subscribe(
         res => {
-          this.members[this.members.findIndex(i => i.id == this.editingSalaryId)] = res
-          this.isLoading = false
-          utils.notification('info', 'Member updated')
+          this.members[this.members.findIndex(i => i.id === this.editingSalaryId)] = res;
+          this.isLoading = false;
+          utils.notification('info', 'Member updated');
         },
         error => {
-          console.log(error.message)
-          utils.notification('error', error.message)
-        },
-        () => {
+          console.log(error.message);
           this.isLoading = false;
+          utils.notification('error', error.message);
         }
       );
     }
