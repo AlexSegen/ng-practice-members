@@ -14,6 +14,8 @@ export class MembersComponent implements OnInit {
 
   selectedMember: Member;
   members: Array<Member>;
+  actives: Array<Member>;
+  inactives: Array<Member>;
   requestResult: any;
   isLoading: boolean;
   editMode: boolean;
@@ -28,6 +30,7 @@ export class MembersComponent implements OnInit {
     this.editMode = false;
     this.editingSalaryId = 0;
     this.selectedMember = new Member();
+
   }
 
   ngOnInit() {
@@ -64,6 +67,9 @@ export class MembersComponent implements OnInit {
     this._memberService.getMembers().subscribe(res => {
       this.members = res;
       this.isLoading = false;
+
+      this.actives = this.members ? this.members.filter(m => m.isActive) : [];
+      this.inactives = this.members ? this.members.filter(m => !m.isActive) : [];
     },
     error => {
       console.log(error.message);

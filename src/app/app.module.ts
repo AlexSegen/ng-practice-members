@@ -9,7 +9,9 @@ import { MembersComponent } from './members/members.component';
 import { PriceInputComponent } from './members/price-input/price-input.component';
 
 import { CurrencyPipe } from './pipes/currency.pipe';
-import { RolesComponent } from './roles/roles.component'
+import { RolesComponent } from './roles/roles.component';
+import { DashboardComponent } from './members/dashboard/dashboard.component';
+import { DashcardComponent } from './members/dashboard/dashcard/dashcard.component'
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { RolesComponent } from './roles/roles.component'
     MembersComponent,
     PriceInputComponent,
     CurrencyPipe,
-    RolesComponent
+    RolesComponent,
+    DashboardComponent,
+    DashcardComponent
   ],
   imports: [
     BrowserModule,

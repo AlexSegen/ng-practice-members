@@ -1,0 +1,27 @@
+.ds {
+    &__item {
+        color: #111;
+        padding: 10px;
+        background: #fff;
+        border-radius: 4px;
+        display: inline-block;
+        width: 200px;
+        margin-right: 10px;
+        box-shadow: 0 10px 10px rgba(#000, .03);
+
+        &-value {
+            font-size: 30px;
+            font-weight: 600;
+            text-align: right;
+
+        }
+
+        &-label {
+            font-size: 14px;
+            font-weight: normal;
+            text-align: right;
+            
+        }
+
+    }
+}
