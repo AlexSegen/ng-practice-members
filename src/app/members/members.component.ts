@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Member } from '../models/member';
+import { Member } from '../interfaces/member'
 import { MemberService } from '../services/member.service';
 import {RolesService} from '../services/roles.service';
 
@@ -10,6 +10,7 @@ import utils from '../helpers/utils';
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss']
 })
+
 export class MembersComponent implements OnInit {
 
   selectedMember: Member;
@@ -29,7 +30,6 @@ export class MembersComponent implements OnInit {
     this.requestResult = false;
     this.editMode = false;
     this.editingSalaryId = 0;
-    this.selectedMember = new Member();
 
   }
 
@@ -42,10 +42,10 @@ export class MembersComponent implements OnInit {
     this.roles = this._rolesService.getRoles();
   }
 
-  updateSalary(val: number) {
+  updateSalary(val: number): void {
     this._memberService.updateMemberSalary(this.editingSalaryId, val).subscribe(
-      res => {
-        this.members[this.members.findIndex(i => i.id === this.editingSalaryId)] = res;
+      (res: Member) => {
+        this.members[this.members.findIndex((i: Member) => i.id === this.editingSalaryId)] = res;
         this.editMode = false;
         this.editingSalaryId = 0;
         utils.notification('info', 'Member updated');
@@ -64,10 +64,9 @@ export class MembersComponent implements OnInit {
 
   getMembers(): void {
     this.isLoading = true;
-    this._memberService.getMembers().subscribe(res => {
+    this._memberService.getMembers().subscribe((res: Member[])=> {
       this.members = res;
       this.isLoading = false;
-
       this.actives = this.members ? this.members.filter(m => m.isActive) : [];
       this.inactives = this.members ? this.members.filter(m => !m.isActive) : [];
     },
@@ -100,11 +99,18 @@ export class MembersComponent implements OnInit {
     });
   }
 
-  resetform(): void {
-    this.selectedMember = new Member();
+  addNew() {
+    this.selectedMember = {
+      id: 0,
+      role: ""
+    }
   }
 
-  getMember(member): void {
+  resetform(): void {
+    this.selectedMember = undefined;
+  }
+
+  getMember(member: Member): void {
     this.selectedMember = member;
   }
 
@@ -163,7 +169,7 @@ export class MembersComponent implements OnInit {
   setMember(): void {
     this.isLoading = true;
 
-    if (this.selectedMember.id === 0) {
+    if (this.selectedMember && this.selectedMember.id === 0) {
 
       this._memberService.addMember(this.selectedMember).subscribe(
         member => {

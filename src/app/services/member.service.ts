@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 
 import { HttpHeaders } from '@angular/common/http';
 
+import { Member } from '../interfaces/member'
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
     //'Authorization': 'my-auth-token'
   })
 };
-
-import { Member } from '../models/member'
 
 import _ from 'underscore'
 

@@ -33,25 +33,25 @@ export default {
     },
     validation : {
         isEmpty(str:any): Boolean {
-            return str.toString().trim().length == 0
+            return str ? str.toString().trim().length == 0 : false
         },
         isEmail(str:String): Boolean {
-            return validator.isEmail(str);
+            return str ? validator.isEmail(str) : false
         },
         isAlpha(str:any): Boolean {
             const containsLetters = /[a-zA-Z]/;
             const containsNumbers = /\d+/;
-            return containsLetters.test(str.toString()) && !containsNumbers.test(str.toString())
+            return str ? containsLetters.test(str.toString()) && !containsNumbers.test(str.toString()) : false
         },
         isDataURI(str:String): Boolean {
-            return validator.isDataURI(str);
+            return str ? validator.isDataURI(str) : false
         },
         isLength(str:String): Boolean {
-            return str.toString().trim().length > 2
+            return str ? str.toString().trim().length > 2 : false
         },
         isNumeric(str:any): Boolean {
             const regex = /^[0-9]+$/
-            return regex.test(str)
+            return str ? regex.test(str) : false
         }
     }
 }

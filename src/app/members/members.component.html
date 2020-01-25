@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xl-3 col-sm-4">
-            <div class="card mb-3">
+            <div class="card mb-3" *ngIf="selectedMember">
                 <div class="card-header">Member Management</div>
                 <div class="card-body">
                     <div>
@@ -48,7 +48,7 @@
 
                         <div class="form-group row">
                             <div class="col-sm-8 d-flex">
-                                <button *ngIf="selectedMember.id == '0'; else updateBlock" (click)="handleForm()"
+                                <button *ngIf="selectedMember.id === 0; else updateBlock" (click)="handleForm()"
                                     [disabled]="isLoading" class="btn btn-primary" type="button">Create member</button>
                                 <ng-template #updateBlock>
                                     <button (click)="handleForm()" [disabled]="isLoading" class="btn btn-info"
@@ -85,7 +85,7 @@
                     <div class="row">
                         <div class="col-sm-9">Members list</div>
                         <div class="col-sm-3 text-right">
-                            <button class="btn btn-primary btn-sm" type="button">New member</button>
+                            <button class="btn btn-primary btn-sm" type="button" (click)="addNew()">New member</button>
                         </div>
                     </div>
                     
@@ -103,8 +103,8 @@
                                     <td></td>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr *ngFor="let member of members" [ngClass]="{tractive: member.id == selectedMember.id}">
+                            <tbody >
+                                <tr *ngFor="let member of members" [ngClass]="{tractive: selectedMember && member?.id == selectedMember.id}">
                                     <td (click)="getMember(member)" class="cursor-action">
                                         <div *ngIf="member.isActive; else inactiveBlock"
                                             class="spinner-grow spinner-grow-sm text-success mr-1" role="status"></div>
@@ -137,7 +137,7 @@
                                         </button>
                                     </td>
                                 </tr>
-                            </tbody>
+                            </tbody >
                         </table>
                     </div>
                 </div>
