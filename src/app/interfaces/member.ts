@@ -4,6 +4,6 @@ export interface Member {
     email?: string;
     company?: string;
     salary?: number;
-    role?: string;
+    role?: number;
     isActive?: boolean
 }

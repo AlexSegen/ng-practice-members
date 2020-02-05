@@ -34,12 +34,21 @@ export class MembersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getMembers();
     this.getRoles();
   }
 
   getRoles() {
-    this.roles = this._rolesService.getRoles();
+    this._rolesService.getRoles$.subscribe((roles: Rol[]) => {
+      this.roles = roles
+      this.getMembers();
+    })
+  }
+
+  getRol(rolID: number) {
+    const find = this.roles
+    .find(r => r.id == rolID)
+    if(find)
+      return find.name;
   }
 
   updateSalary(val: number): void {
@@ -102,7 +111,7 @@ export class MembersComponent implements OnInit {
   addNew() {
     this.selectedMember = {
       id: 0,
-      role: ""
+      role: 0
     }
   }
 
@@ -197,4 +206,9 @@ export class MembersComponent implements OnInit {
       );
     }
   }
+}
+
+interface Rol {
+  id: number;
+  name: string;
 }

@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <select name="" id="" class="form-control" [(ngModel)]="selectedMember.role" [disabled]="isLoading">
                                 <option value="">Select rol</option>
-                                <option  *ngFor="let role of roles" [value]="role">{{role}}</option>
+                                <option  *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -116,7 +116,7 @@
                                     </td>
                                     <td (click)="getMember(member)" class="cursor-action">{{ member.email }}</td>
                                     <td (click)="getMember(member)" class="cursor-action">{{ member.company }}</td>
-                                    <td (click)="getMember(member)" class="cursor-action">{{ member.role }}</td>
+                                    <td (click)="getMember(member)" class="cursor-action">{{ getRol(member.role) }}</td>
                                     <td class="text-right" >
                                         <div class="text-right" *ngIf="editMode && editingSalaryId == member.id; else elseBlock">
                                             <price-input (salaryChange)='updateSalary($event)'

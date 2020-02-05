@@ -6,21 +6,26 @@ import {RolesService} from '../services/roles.service'
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']
 })
+
+
 export class RolesComponent implements OnInit {
 
-  roles;
-  message:string;
+  roles: Array<Rol>;
+  message: string;
 
-  constructor(private _rolesService: RolesService) {
-   }
+  constructor(private _rolesService: RolesService) {}
 
   ngOnInit() {
-    this._rolesService.sharedMessage.subscribe(message => this.message = message)
     this.getRoles()
   }
 
   getRoles() {
-    this.roles = this._rolesService.getRoles();
+    this._rolesService.getRoles$.subscribe((roles: Rol[]) => this.roles = roles)
   }
 
+}
+
+interface Rol {
+  id: number;
+  name: string;
 }

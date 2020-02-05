@@ -4,7 +4,7 @@
         <ul class="list-group">
             <li class="list-group-item" *ngIf="!roles || !roles.length; else rolesBlock">There are no roles yet</li>
             <ng-template #rolesBlock>
-                <li *ngFor="let rol of roles" class="list-group-item">{{rol}}</li>
+                <li *ngFor="let rol of roles" class="list-group-item">{{rol.name}}</li>
             </ng-template>
         </ul>
     </div>
