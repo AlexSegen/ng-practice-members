@@ -81,5 +81,27 @@
       "isActive": true,
       "id": 15
     }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "name": "Frontend Developer"
+    },
+    {
+      "id": 2,
+      "name": "Backend Developer"
+    },
+    {
+      "id": 3,
+      "name": "FullStack Developer"
+    },
+    {
+      "id": 4,
+      "name": "DevOps"
+    },
+    {
+      "id": 5,
+      "name": "Mobile Developer"
+    }
   ]
 }

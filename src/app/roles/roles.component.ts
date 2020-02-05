@@ -9,11 +9,13 @@ import {RolesService} from '../services/roles.service'
 export class RolesComponent implements OnInit {
 
   roles;
+  message:string;
 
   constructor(private _rolesService: RolesService) {
    }
 
   ngOnInit() {
+    this._rolesService.sharedMessage.subscribe(message => this.message = message)
     this.getRoles()
   }
 
